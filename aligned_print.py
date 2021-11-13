@@ -18,6 +18,7 @@ def printer(print_function=print):
     try:
         yield printer_impl
     finally:
-        max_key_width = max(map(len, keys))
-        for key, value in zip(keys, values):
-            print_function(f'{key:{max_key_width}} => {value}')
+        if keys:
+            max_key_width = max(map(len, keys))
+            for key, value in zip(keys, values):
+                print_function(f'{key:{max_key_width}} => {value}')

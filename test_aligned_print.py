@@ -44,3 +44,8 @@ id   => 10
 age  => 29
 """
     assert(output.getvalue().strip('\n') == expected.strip('\n'))
+
+
+def test_empty_with_statement():
+    with aligned_print.printer() as print_:
+        pass
