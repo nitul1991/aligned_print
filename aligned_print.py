@@ -9,16 +9,14 @@ def printer(print_function=print, separator=" => "):
     """A context manager that prints key value pairs, with the keys being
     printed with a fixed width that is equal to the width of the longest key
     """
-    keys   = []
-    values = []
+    key_values = []
     def printer_impl(key, value):
-        keys.append(key)
-        values.append(value)
+        key_values.append((key, value))
 
     try:
         yield printer_impl
     finally:
-        if keys:
-            max_key_width = max(map(len, keys))
-            for key, value in zip(keys, values):
+        if key_values:
+            max_key_width = max(map(lambda kv: len(kv[0]), key_values))
+            for key, value in key_values:
                 print_function(f'{key:{max_key_width}}{separator}{value}')
