@@ -5,7 +5,7 @@ import logging
 
 
 @contextlib.contextmanager
-def printer(print_function=print):
+def printer(print_function=print, separator=" => "):
     """A context manager that prints key value pairs, with the keys being
     printed with a fixed width that is equal to the width of the longest key
     """
@@ -21,4 +21,4 @@ def printer(print_function=print):
         if keys:
             max_key_width = max(map(len, keys))
             for key, value in zip(keys, values):
-                print_function(f'{key:{max_key_width}} => {value}')
+                print_function(f'{key:{max_key_width}}{separator}{value}')

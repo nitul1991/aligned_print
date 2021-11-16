@@ -49,3 +49,24 @@ age  => 29
 def test_empty_with_statement():
     with aligned_print.printer() as print_:
         pass
+
+
+def test_separator():
+    output = io.StringIO()
+    print_function = lambda msg: output.write(f'{msg}\n')
+
+    with aligned_print.printer(print_function, "|") as print_:
+        print_('a', 'a')
+        print_('bb', 'b')
+        print_('ccc', 'c')
+        print_('dddd', 'd')
+        print_('eeeee', 'e')
+
+    expected = """
+a    |a
+bb   |b
+ccc  |c
+dddd |d
+eeeee|e
+"""
+    assert(output.getvalue().strip('\n') == expected.strip('\n'))
